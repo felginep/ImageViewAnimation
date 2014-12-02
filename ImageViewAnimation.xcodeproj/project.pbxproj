@@ -14,6 +14,8 @@
 		4908F6D81A2E30180009883C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4908F6D71A2E30180009883C /* Images.xcassets */; };
 		4908F6DB1A2E30180009883C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4908F6D91A2E30180009883C /* LaunchScreen.xib */; };
 		4908F6E71A2E30180009883C /* ImageViewAnimationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4908F6E61A2E30180009883C /* ImageViewAnimationTests.m */; };
+		4908F6F11A2E30B60009883C /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4908F6F01A2E30B60009883C /* image.jpg */; };
+		4908F6F41A2E5D3F0009883C /* AnimatedLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4908F6F31A2E5D3F0009883C /* AnimatedLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,9 @@
 		4908F6E01A2E30180009883C /* ImageViewAnimationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageViewAnimationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4908F6E51A2E30180009883C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4908F6E61A2E30180009883C /* ImageViewAnimationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageViewAnimationTests.m; sourceTree = "<group>"; };
+		4908F6F01A2E30B60009883C /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
+		4908F6F21A2E5D3F0009883C /* AnimatedLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedLayer.h; sourceTree = "<group>"; };
+		4908F6F31A2E5D3F0009883C /* AnimatedLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +86,7 @@
 		4908F6C91A2E30180009883C /* ImageViewAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				4908F6F01A2E30B60009883C /* image.jpg */,
 				4908F6CE1A2E30180009883C /* AppDelegate.h */,
 				4908F6CF1A2E30180009883C /* AppDelegate.m */,
 				4908F6D11A2E30180009883C /* ViewController.h */,
@@ -89,6 +95,8 @@
 				4908F6D71A2E30180009883C /* Images.xcassets */,
 				4908F6D91A2E30180009883C /* LaunchScreen.xib */,
 				4908F6CA1A2E30180009883C /* Supporting Files */,
+				4908F6F21A2E5D3F0009883C /* AnimatedLayer.h */,
+				4908F6F31A2E5D3F0009883C /* AnimatedLayer.m */,
 			);
 			path = ImageViewAnimation;
 			sourceTree = "<group>";
@@ -199,6 +207,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4908F6F11A2E30B60009883C /* image.jpg in Resources */,
 				4908F6D61A2E30180009883C /* Main.storyboard in Resources */,
 				4908F6DB1A2E30180009883C /* LaunchScreen.xib in Resources */,
 				4908F6D81A2E30180009883C /* Images.xcassets in Resources */,
@@ -221,6 +230,7 @@
 			files = (
 				4908F6D31A2E30180009883C /* ViewController.m in Sources */,
 				4908F6D01A2E30180009883C /* AppDelegate.m in Sources */,
+				4908F6F41A2E5D3F0009883C /* AnimatedLayer.m in Sources */,
 				4908F6CD1A2E30180009883C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
