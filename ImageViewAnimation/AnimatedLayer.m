@@ -17,10 +17,10 @@
 }
 @end
 
-#define DURATION 0.2f
-#define DELAY 0.5f
+#define DURATION 0.25f
+#define DELAY 0.2f
 #define MIN_RADIUS 30.0f
-#define MIN_SMALL_RADIUS 24.0f
+#define MIN_SMALL_RADIUS 26.0f
 
 @implementation AnimatedLayer
 
@@ -54,7 +54,7 @@
 
 - (void)drawInContext:(CGContextRef)ctx {
     if (self.state == StateLoading) {
-        CGContextSetLineWidth(ctx, 6.0f);
+        CGContextSetLineWidth(ctx, MIN_RADIUS - MIN_SMALL_RADIUS);
         CGContextSetLineJoin(ctx, kCGLineJoinRound);
         CGContextBeginPath(ctx);
         CGContextAddArc(ctx, self.bounds.size.width / 2.0f, self.bounds.size.height / 2.0f, MIN_RADIUS, 0, self.percentage * 2 * M_PI, NO);
