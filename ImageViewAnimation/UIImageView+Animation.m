@@ -13,6 +13,8 @@
 
 - (void)animateImageWithURL:(NSURL *)url {
     __block CAShapeLayer * shapeLayer;
+    UIColor * lastColor = self.backgroundColor;
+
     if (!self.layer.mask) {
         shapeLayer = [[CAShapeLayer alloc] init];
         CGFloat size = 40.0;
@@ -22,6 +24,8 @@
         shapeLayer.fillColor = [UIColor clearColor].CGColor;
         shapeLayer.strokeEnd = 0;
         self.layer.mask = shapeLayer;
+
+        self.backgroundColor = [UIColor darkGrayColor];
     }
 
     [self sd_setImageWithURL:url placeholderImage:nil options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
@@ -37,6 +41,7 @@
         if (cacheType == SDImageCacheTypeDisk || cacheType == SDImageCacheTypeMemory) { // NO animation
             self.layer.mask = nil;
             shapeLayer = nil;
+            self.backgroundColor = lastColor;
             return ;
         }
 
@@ -61,12 +66,13 @@
         [path appendPath:[UIBezierPath bezierPathWithOvalInRect:rect]];
 
         [CATransaction begin]; {
-            [CATransaction setAnimationDuration:3.3f];
+            [CATransaction setAnimationDuration:0.5f];
             [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn]];
             [CATransaction setCompletionBlock:^{
                 NSLog(@"animationCompleted");
                 shapeLayer = nil;
                 self.layer.mask = nil;
+                self.backgroundColor = lastColor;
             }];
 
             CABasicAnimation * animation = [CABasicAnimation animationWithKeyPath:@"path"];

@@ -15,15 +15,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    SDImageCache * imageCache = [SDImageCache sharedImageCache];
-    [imageCache clearMemory];
-    [imageCache clearDisk];
-    
     self.imageView.backgroundColor = [UIColor darkGrayColor];
     self.imageView.image = nil;
 }
 
 - (IBAction)animate:(id)sender {
+    SDImageCache * imageCache = [SDImageCache sharedImageCache];
+    [imageCache clearMemory];
+    [imageCache clearDisk];
+
     [self.imageView animateImageWithURL:[NSURL URLWithString:@"http://www.designbolts.com/wp-content/uploads/2014/09/Colorful-Apple-iPhone-6-Plus-wallpaper1.jpg"]];
 }
 
