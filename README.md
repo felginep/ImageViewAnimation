@@ -11,3 +11,5 @@ To build the project, make sure to update submodule first:
 - `git submodule update`
 
 Inspiration from http://www.michaelvillar.com/motion (08-Photo Loading).
+
+![Demo](http://s15.postimg.org/ifgzwxi7v/video.gif)
