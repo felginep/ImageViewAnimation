@@ -75,9 +75,8 @@
 
             CABasicAnimation * animation = [CABasicAnimation animationWithKeyPath:@"path"];
             animation.beginTime = CACurrentMediaTime() + AN_ANIMATION_DELAY;
-            animation.fromValue = (__bridge id)(fromPath.CGPath);
+            animation.fromValue = (__bridge id)fromPath.CGPath;
             animation.toValue = (__bridge id)toPath.CGPath;
-            animation.delegate = self;
             animation.removedOnCompletion = NO;
             animation.fillMode = kCAFillModeForwards;
             [shapeLayer addAnimation:animation forKey:@"pathAnimation"];
