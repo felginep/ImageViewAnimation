@@ -14,7 +14,6 @@
 		4908F6D81A2E30180009883C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4908F6D71A2E30180009883C /* Images.xcassets */; };
 		4908F6DB1A2E30180009883C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4908F6D91A2E30180009883C /* LaunchScreen.xib */; };
 		4908F6E71A2E30180009883C /* ImageViewAnimationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4908F6E61A2E30180009883C /* ImageViewAnimationTests.m */; };
-		4908F6F11A2E30B60009883C /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4908F6F01A2E30B60009883C /* image.jpg */; };
 		4923246B1A2FCFBE0081128F /* UIImageView+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4923246A1A2FCFBE0081128F /* UIImageView+Animation.m */; };
 		4990EC551A2FB0E2002EF216 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4990EC351A2FB0E2002EF216 /* MKAnnotationView+WebCache.m */; };
 		4990EC561A2FB0E2002EF216 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 4990EC371A2FB0E2002EF216 /* NSData+ImageContentType.m */; };
@@ -58,7 +57,6 @@
 		4908F6E01A2E30180009883C /* ImageViewAnimationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageViewAnimationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4908F6E51A2E30180009883C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4908F6E61A2E30180009883C /* ImageViewAnimationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageViewAnimationTests.m; sourceTree = "<group>"; };
-		4908F6F01A2E30B60009883C /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
 		492324691A2FCFBE0081128F /* UIImageView+Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Animation.h"; sourceTree = "<group>"; };
 		4923246A1A2FCFBE0081128F /* UIImageView+Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Animation.m"; sourceTree = "<group>"; };
 		4990EC341A2FB0E2002EF216 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -136,17 +134,16 @@
 			isa = PBXGroup;
 			children = (
 				4990EC321A2FB0C8002EF216 /* Modules */,
-				4908F6F01A2E30B60009883C /* image.jpg */,
 				4908F6CE1A2E30180009883C /* AppDelegate.h */,
 				4908F6CF1A2E30180009883C /* AppDelegate.m */,
 				4908F6D11A2E30180009883C /* ViewController.h */,
 				4908F6D21A2E30180009883C /* ViewController.m */,
+				492324691A2FCFBE0081128F /* UIImageView+Animation.h */,
+				4923246A1A2FCFBE0081128F /* UIImageView+Animation.m */,
 				4908F6D41A2E30180009883C /* Main.storyboard */,
 				4908F6D71A2E30180009883C /* Images.xcassets */,
 				4908F6D91A2E30180009883C /* LaunchScreen.xib */,
 				4908F6CA1A2E30180009883C /* Supporting Files */,
-				492324691A2FCFBE0081128F /* UIImageView+Animation.h */,
-				4923246A1A2FCFBE0081128F /* UIImageView+Animation.m */,
 			);
 			path = ImageViewAnimation;
 			sourceTree = "<group>";
@@ -306,7 +303,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4908F6F11A2E30B60009883C /* image.jpg in Resources */,
 				4908F6D61A2E30180009883C /* Main.storyboard in Resources */,
 				4908F6DB1A2E30180009883C /* LaunchScreen.xib in Resources */,
 				4908F6D81A2E30180009883C /* Images.xcassets in Resources */,
