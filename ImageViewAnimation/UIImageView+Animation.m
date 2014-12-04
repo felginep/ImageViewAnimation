@@ -9,6 +9,11 @@
 #import "UIImageView+Animation.h"
 #import "UIImageView+WebCache.h"
 
+#define AN_LOADER_SIZE 40.0f
+#define AN_LOADER_LINE_WIDTH 2.0f
+#define AN_ANIMATION_DURATION 0.4f
+#define AN_ANIMATION_DELAY 0.2f
+
 @implementation UIImageView (Animation)
 
 - (void)animateImageWithURL:(NSURL *)url {
@@ -17,31 +22,33 @@
 
     if (!self.layer.mask) {
         shapeLayer = [[CAShapeLayer alloc] init];
-        CGFloat size = 40.0;
-        shapeLayer.path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0.5f * (self.bounds.size.width - size), 0.5f * (self.bounds.size.height - size), size, size)].CGPath;
-        shapeLayer.lineWidth = 2.0f;
+        shapeLayer.contentsScale = self.layer.contentsScale;
+        shapeLayer.path = [UIBezierPath bezierPathWithOvalInRect:[self _centerRectWithSize:AN_LOADER_SIZE]].CGPath;
+        shapeLayer.lineWidth = AN_LOADER_LINE_WIDTH;
         shapeLayer.strokeColor = [UIColor blackColor].CGColor;
         shapeLayer.fillColor = [UIColor clearColor].CGColor;
         shapeLayer.strokeEnd = 0;
         self.layer.mask = shapeLayer;
-
         self.backgroundColor = [UIColor darkGrayColor];
     }
 
     [self sd_setImageWithURL:url placeholderImage:nil options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
         CGFloat percentage = (CGFloat)receivedSize / (CGFloat)expectedSize;
-        NSLog(@"percentage => %f", percentage);
         if (percentage > 0) {
             shapeLayer.strokeEnd = percentage;
         }
 
     } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        NSLog(@"completed");
         self.image = image;
-        if (cacheType == SDImageCacheTypeDisk || cacheType == SDImageCacheTypeMemory) { // NO animation
+
+        void(^completionBlock)() = ^{
             self.layer.mask = nil;
             shapeLayer = nil;
             self.backgroundColor = lastColor;
+        };
+
+        if (cacheType == SDImageCacheTypeDisk || cacheType == SDImageCacheTypeMemory) { // NO animation
+            completionBlock();
             return ;
         }
 
@@ -49,45 +56,42 @@
         shapeLayer.strokeColor = [UIColor clearColor].CGColor;
         shapeLayer.fillColor = [UIColor blackColor].CGColor;
 
-        CGFloat size = 40.0;
-        CGRect rect = CGRectMake(0.5f * (self.bounds.size.width - size), 0.5f * (self.bounds.size.height - size), size, size);
-
-        UIBezierPath * path = [UIBezierPath bezierPathWithOvalInRect:rect];
-        rect = CGRectInset(rect, 2, 2);
-        [path appendPath:[UIBezierPath bezierPathWithOvalInRect:rect]];
-        shapeLayer.path = path.CGPath;
+        UIBezierPath * fromPath = [UIBezierPath bezierPathWithOvalInRect:[self _centerRectWithSize:AN_LOADER_SIZE]];
+        [fromPath appendPath:[UIBezierPath bezierPathWithOvalInRect:[self _centerRectWithSize:AN_LOADER_SIZE - AN_LOADER_LINE_WIDTH]]];
+        shapeLayer.path = fromPath.CGPath;
         shapeLayer.fillRule = kCAFillRuleEvenOdd;
 
         CGFloat maxSize = MAX(self.bounds.size.width, self.bounds.size.height);
         CGFloat maxRadius = sqrtf(maxSize * maxSize / 2);
-        rect = CGRectMake(0.5f * (self.bounds.size.width - 2 * maxRadius), 0.5f * (self.bounds.size.height - 2 * maxRadius), 2 * maxRadius, 2 * maxRadius);
-        path = [UIBezierPath bezierPathWithOvalInRect:rect];
-        rect = CGRectMake(0.5f * self.bounds.size.width, 0.5f * self.bounds.size.height, 0, 0);
-        [path appendPath:[UIBezierPath bezierPathWithOvalInRect:rect]];
+        UIBezierPath * toPath = [UIBezierPath bezierPathWithOvalInRect:[self _centerRectWithSize:2 * maxRadius]];
+        [toPath appendPath:[UIBezierPath bezierPathWithOvalInRect:[self _centerRectWithSize:0]]];
 
         [CATransaction begin]; {
-            [CATransaction setAnimationDuration:0.5f];
-            [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn]];
+            [CATransaction setAnimationDuration:AN_ANIMATION_DURATION];
+            [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
             [CATransaction setCompletionBlock:^{
-                NSLog(@"animationCompleted");
-                shapeLayer = nil;
-                self.layer.mask = nil;
-                self.backgroundColor = lastColor;
+                completionBlock();
             }];
 
             CABasicAnimation * animation = [CABasicAnimation animationWithKeyPath:@"path"];
-            animation.beginTime = CACurrentMediaTime() + 0.3f;
-            animation.fromValue = (__bridge id)(shapeLayer.path);
-            animation.toValue = (__bridge id)path.CGPath;
+            animation.beginTime = CACurrentMediaTime() + AN_ANIMATION_DELAY;
+            animation.fromValue = (__bridge id)(fromPath.CGPath);
+            animation.toValue = (__bridge id)toPath.CGPath;
             animation.delegate = self;
             animation.removedOnCompletion = NO;
             animation.fillMode = kCAFillModeForwards;
-
             [shapeLayer addAnimation:animation forKey:@"pathAnimation"];
         } [CATransaction commit];
-
-
     }];
+}
+
+#pragma mark - Private
+
+- (CGRect)_centerRectWithSize:(CGFloat)size {
+    return CGRectMake(0.5f * (self.bounds.size.width - size),
+                      0.5f * (self.bounds.size.height - size),
+                      size,
+                      size);
 }
 
 @end
